@@ -21,20 +21,14 @@ public class EnemyBullet : MonoBehaviour
     {
         if (rigidbody.position.z > 3.2f || rigidbody.position.z < 0.0f)
         {
-            Destroy(gameObject);
-        }
-    }
-    public void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collide!");
-        Collider collider = collision.collider;
-        if (collider.CompareTag("PlayerShip"))
-        {
-            Debug.Log("Collide with " + collider.tag);
-            PlayerShip playerShip= collider.gameObject.GetComponent<PlayerShip>();
-            playerShip.Die();
-            Destroy(gameObject);
+            transform.position = new Vector3(rigidbody.position.x, rigidbody.position.y, 0f);
+            gameObject.tag = "BulletsOnGround";
+            Debug.Log(gameObject.tag);
         }
     }
 
+    public void Die()
+    {
+        Destroy(gameObject);
+    }
 }

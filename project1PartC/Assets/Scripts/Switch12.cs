@@ -11,11 +11,13 @@ public class Switch12 : MonoBehaviour
     void Start()
     {
         this.GetComponent<Button>().onClick.AddListener(OnClick);
+        Global.score = 0;
+        Global.livesRemaining = 3;
     }
 
     void OnClick()
     {
-        SceneManager.LoadScene("Level2");//level1为我们要切换到的场景
+        SceneManager.LoadScene("Level2");
     }
 
     // Update is called once per frame

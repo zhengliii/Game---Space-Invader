@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class AliensControl : MonoBehaviour
 {
@@ -18,7 +17,7 @@ public class AliensControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.childCount > 0 && transform.position.z > 0.3)
+        if (transform.childCount > 0)
         {
             transform.Translate(hStep * direction * Time.deltaTime, 0, 0);
             if (transform.position.x > 0.8 || transform.position.x < -0.8)
@@ -27,15 +26,12 @@ public class AliensControl : MonoBehaviour
                 //transform.Translate(0, 0, -2f * Time.deltaTime);
                 transform.position -= new Vector3(0, 0, vStep);
                 hStep += 0.08f;
+                Invoke("Delay", 1);
             }
         }
-        if (transform.position.z <= 0.3)
-        {
-            Invoke("SwitchScene3", 1f);
-        }
     }
-    void SwitchScene3()
+
+    void Delay()
     {
-        SceneManager.LoadScene("Level3");
     }
 }

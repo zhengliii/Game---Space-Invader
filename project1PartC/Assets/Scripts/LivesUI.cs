@@ -18,6 +18,6 @@ public class LivesUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        livesText.text = "LIVES: " + globalObj.livesRemaining.ToString();
+        livesText.text = "LIVES: " + Global.livesRemaining.ToString();
     }
 }

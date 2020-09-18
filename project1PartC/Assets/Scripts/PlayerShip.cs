@@ -46,8 +46,21 @@ public class PlayerShip : MonoBehaviour
         SoundManager.instance.PlayExplosion();
         GameObject obj = GameObject.Find("GlobalObject");
         Global g = obj.GetComponent<Global>();
-        g.livesRemaining --;
+        Global.livesRemaining --;
         g.CreatePlayer();
         Destroy(gameObject);
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Collide!");
+        Collider collider = collision.collider;
+        if (collider.CompareTag("EnemyBullet"))
+        {
+            Debug.Log("Collide with " + collider.tag);
+            EnemyBullet enemyBullet = collider.gameObject.GetComponent<EnemyBullet>();
+            enemyBullet.Die();
+            Die();
+        }
     }
 }

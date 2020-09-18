@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class Global : MonoBehaviour
 {
     public float timer;
-    public int score;
-    public int livesRemaining;
+    public static int score;
+    public static int livesRemaining;
     public int enemiesRemaining;
     public List<Alien> aliens;
     public GameObject PlayerShip;
@@ -15,9 +15,7 @@ public class Global : MonoBehaviour
 
     void Start()
     {
-        score = 0;
         timer = 0;
-        livesRemaining = 3;
         enemiesRemaining = 55;
         aliens = new List<Alien>();
         GameObject[] aliensObj = GameObject.FindGameObjectsWithTag("Enemy");
@@ -34,6 +32,11 @@ public class Global : MonoBehaviour
         timer += Time.deltaTime;
         if(livesRemaining <= 0){
             SceneManager.LoadScene("Level3");
+        }
+        if(enemiesRemaining <= 0)
+        {
+            SceneManager.LoadScene("Level2");
+            livesRemaining++;
         }
     }
 

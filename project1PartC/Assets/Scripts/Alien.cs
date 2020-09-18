@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Alien : MonoBehaviour
 {
@@ -21,6 +22,11 @@ public class Alien : MonoBehaviour
     void Update()
     {
         ExchangeSprite();
+        if (transform.position.z <= 0.3)
+        {
+            Debug.Log("switch");
+            Invoke("SwitchScene3", 1f);
+        }
     }
     
     void Awake()
@@ -47,7 +53,7 @@ public class Alien : MonoBehaviour
         SoundManager.instance.PlayInvaderKilled();
         GameObject obj = GameObject.Find("GlobalObject");
         Global g = obj.GetComponent<Global>();
-        g.score += score;
+        Global.score += score;
         g.enemiesRemaining--;
         g.aliens.Remove(this);
         Destroy(gameObject);
@@ -60,5 +66,9 @@ public class Alien : MonoBehaviour
         Quaternion rot = Quaternion.Euler(new Vector3(90, 0, 0));
         GameObject obj = Instantiate(EnemyBullet, spawnPos, rot) as GameObject;
         EnemyBullet b = obj.GetComponent<EnemyBullet>();
+    }
+    void SwitchScene3()
+    {
+        SceneManager.LoadScene("Level3");
     }
 }
