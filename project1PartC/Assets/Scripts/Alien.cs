@@ -11,21 +11,43 @@ public class Alien : MonoBehaviour
     Sprite sprite0;
     public float dt = 0.3f;
     float currTime;
+    float dropTime;
     public int score;
     public GameObject EnemyBullet;
+    Rigidbody rigidbody;
+    public Vector3 thrust;
+    public GameObject Explosion;
     void Start()
     {
         currTime = 0;
+        dropTime = 0;
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         ExchangeSprite();
-        if (transform.position.z <= 0.3)
+        if (gameObject.tag == "Enemy" && rigidbody.position.z <= 0.3f)
         {
-            Debug.Log("switch");
             Invoke("SwitchScene3", 1f);
+        }
+        if (rigidbody.position.z < 0f)
+        {
+            transform.position = new Vector3(rigidbody.position.x, rigidbody.position.y, 0f);
+        }
+        if (gameObject.tag == "EnemyOnGround")
+        {
+            dropTime += Time.deltaTime;
+            if (dropTime > 4f)
+            {
+                GameObject obj = GameObject.Find("GlobalObject");
+                Global g = obj.GetComponent<Global>();
+                g.enemiesRemaining--;
+                g.aliens.Remove(this);
+                Instantiate(Explosion, gameObject.transform.position, Quaternion.AngleAxis(-90, Vector3.right));
+                Destroy(gameObject);
+            }
         }
     }
     
@@ -50,7 +72,6 @@ public class Alien : MonoBehaviour
     }
     public void Die()
     {
-        SoundManager.instance.PlayInvaderKilled();
         GameObject obj = GameObject.Find("GlobalObject");
         Global g = obj.GetComponent<Global>();
         Global.score += score;
@@ -70,5 +91,13 @@ public class Alien : MonoBehaviour
     void SwitchScene3()
     {
         SceneManager.LoadScene("Level3");
+    }
+    public void Fall()
+    {
+        thrust.z = -200f;
+        rigidbody.AddForce(thrust);
+        SoundManager.instance.PlayInvaderKilled();
+        gameObject.tag = "EnemyOnGround";
+        Debug.Log(gameObject.tag);
     }
 }

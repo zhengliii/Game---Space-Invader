@@ -5,7 +5,7 @@ using UnityEngine;
 public class AliensControl : MonoBehaviour
 {
     public float direction = 1f;
-    public float hStep = 0.2f;
+    public float hStep = 0.15f;
     public float vStep = 0.1f;
     Rigidbody rigidbody;
     // Start is called before the first frame update
@@ -22,16 +22,10 @@ public class AliensControl : MonoBehaviour
             transform.Translate(hStep * direction * Time.deltaTime, 0, 0);
             if (transform.position.x > 0.8 || transform.position.x < -0.8)
             {
+                transform.position = new Vector3(direction * 0.8f, 0, transform.position.z - vStep);
                 direction = -direction;
-                //transform.Translate(0, 0, -2f * Time.deltaTime);
-                transform.position -= new Vector3(0, 0, vStep);
                 hStep += 0.08f;
-                Invoke("Delay", 1);
             }
         }
-    }
-
-    void Delay()
-    {
     }
 }

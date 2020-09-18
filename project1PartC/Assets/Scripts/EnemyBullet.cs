@@ -23,7 +23,6 @@ public class EnemyBullet : MonoBehaviour
         {
             transform.position = new Vector3(rigidbody.position.x, rigidbody.position.y, 0f);
             gameObject.tag = "BulletsOnGround";
-            Debug.Log(gameObject.tag);
         }
     }
 

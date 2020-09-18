@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4842211584746061526}
   - component: {fileID: 4842211584746061527}
   - component: {fileID: -7980151984394848584}
+  - component: {fileID: 993197723758791638}
+  - component: {fileID: 8890121892490516826}
   m_Layer: 10
   m_Name: Alien
   m_TagString: Enemy
@@ -100,6 +102,8 @@ MonoBehaviour:
   dt: 0.3
   score: 0
   EnemyBullet: {fileID: 8965478278958715324, guid: c185aebc87f8a3b469eb6ffced7f727a, type: 3}
+  thrust: {x: 0, y: 0, z: 0}
+  Explosion: {fileID: 7058562505712352581, guid: 145cc195c03eeba4a9d5b9a57f17c43f, type: 3}
 --- !u!65 &-7980151984394848584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -113,3 +117,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16000004, z: 0.20000005}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &993197723758791638
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4842211584746061524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.100000024
+  m_Height: 0.16000004
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8890121892490516826
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4842211584746061524}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0

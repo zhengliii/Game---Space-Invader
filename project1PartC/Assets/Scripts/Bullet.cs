@@ -27,11 +27,11 @@ public class Bullet : MonoBehaviour
     {
         Debug.Log("Collide!");
         Collider collider = collision.collider;
-        if (collider.CompareTag("Enemy"))
+        if (collider.CompareTag("Enemy") || collider.CompareTag("EnemyOnGround"))
         {
             Debug.Log("Collide with " + collider.tag);
             Alien alien = collider.gameObject.GetComponent<Alien>();
-            alien.Die();
+            alien.Fall();
             Destroy(gameObject);
         }
     }

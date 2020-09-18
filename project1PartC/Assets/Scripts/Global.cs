@@ -16,14 +16,14 @@ public class Global : MonoBehaviour
     void Start()
     {
         timer = 0;
-        enemiesRemaining = 55;
+        enemiesRemaining = 44;
         aliens = new List<Alien>();
         GameObject[] aliensObj = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject a in aliensObj)
         {
             aliens.Add(a.GetComponent<Alien>());
         }
-        InvokeRepeating("FireBullets", 1, 3);
+        InvokeRepeating("FireBullets", 1, 5);
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class Global : MonoBehaviour
 
     void FireBullets()
     {
-        int bullets = Random.Range(1, 6);
+        int bullets = Random.Range(1, 5);
         bullets = Mathf.Clamp(bullets, 0, enemiesRemaining);
         for (int i = 0; i < bullets; i++)
         {
