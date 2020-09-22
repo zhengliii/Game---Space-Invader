@@ -34,5 +34,11 @@ public class Bullet : MonoBehaviour
             alien.Fall();
             Destroy(gameObject);
         }
+        if (collider.CompareTag("Star")) {
+            Star star = collider.gameObject.GetComponent<Star>();
+            star.RewardLife();
+            star.Die();
+            Destroy(gameObject);
+        }
     }
 }

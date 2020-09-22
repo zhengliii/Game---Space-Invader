@@ -11,6 +11,8 @@ public class Global : MonoBehaviour
     public int enemiesRemaining;
     public List<Alien> aliens;
     public GameObject PlayerShip;
+    public GameObject UFO;
+    public GameObject Star;
     // Use this for initialization
 
     void Start()
@@ -24,6 +26,8 @@ public class Global : MonoBehaviour
             aliens.Add(a.GetComponent<Alien>());
         }
         InvokeRepeating("FireBullets", 1, 5);
+        InvokeRepeating("SpawnUFO", 2, 8);
+        InvokeRepeating("SpawnStar", 4, 15);
     }
 
     // Update is called once per frame
@@ -68,5 +72,20 @@ public class Global : MonoBehaviour
             GameObject obj = Instantiate(PlayerShip, spawnPos, rot) as GameObject;
             PlayerShip p = obj.GetComponent<PlayerShip>();
         }
+    }
+
+    void SpawnUFO()
+    {
+        Vector3 spawnPos = new Vector3(-3f, 0, 3f);
+        Quaternion rot = Quaternion.Euler(new Vector3(90, 0, 0));
+        GameObject obj = Instantiate(UFO, spawnPos, rot) as GameObject;
+    }
+    void SpawnStar()
+    {
+        float x = Random.Range(-2.5f, 2.5f);
+        float z = Random.Range(0.3f, 1.5f);
+        Vector3 spawnPos = new Vector3(x, 0, z);
+        Quaternion rot = Quaternion.Euler(new Vector3(90, 0, 0));
+        GameObject obj = Instantiate(Star, spawnPos, rot) as GameObject;
     }
 }

@@ -16,12 +16,14 @@ public class Alien : MonoBehaviour
     public GameObject EnemyBullet;
     Rigidbody rigidbody;
     public Vector3 thrust;
+    public Vector3 alienThrust;
     public GameObject Explosion;
     void Start()
     {
         currTime = 0;
         dropTime = 0;
         rigidbody = GetComponent<Rigidbody>();
+        rigidbody.AddForce(alienThrust);
     }
 
     // Update is called once per frame
@@ -35,6 +37,10 @@ public class Alien : MonoBehaviour
         if (rigidbody.position.z < 0f)
         {
             transform.position = new Vector3(rigidbody.position.x, rigidbody.position.y, 0f);
+        }
+        if (rigidbody.position.x > 5f)
+        {
+            Destroy(gameObject);
         }
         if (gameObject.tag == "EnemyOnGround")
         {
